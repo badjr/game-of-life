@@ -9,8 +9,8 @@ import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 /**
- * The GameOfLifeTableModel is used as a TableModel for the JTable in GameTablePanel.java,
- * and wraps the GameOfLifeModel.
+ * The GameOfLifeTableModel is used as the TableModel for the JTable in
+ * GameTablePanel.java, and wraps the GameOfLifeModel.
  * 
  * @author Brett
  */

@@ -9,8 +9,9 @@ package main;
 import javax.swing.JTable;
 
 /**
- *
- * @author Brett
+ * The GameTablePanel is a JPanel containing the JTable that displays the game
+ * board.
+ * 
  */
 public class GameTablePanel extends javax.swing.JPanel {
     
@@ -21,7 +22,11 @@ public class GameTablePanel extends javax.swing.JPanel {
     public GameTablePanel() {
         initComponents();
     }
-
+    
+    /**
+     * 
+     * @return The JTable that displays the game board.
+     */
     public JTable getTable() {
         return gameTable;
     }

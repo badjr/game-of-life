@@ -10,8 +10,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
 /**
- *
- * @author Brett
+ * The GameWindowFrame contains all the GUI components of the game in one
+ * JFrame (window).
+ * 
  */
 public class GameWindowFrame extends javax.swing.JFrame {
 
@@ -23,6 +24,7 @@ public class GameWindowFrame extends javax.swing.JFrame {
      */
     public GameWindowFrame(GameOfLifeModel gameOfLifeModel) {
         
+        //Game window frame needs the GameOfLifeModel
         GameWindowFrame.gameOfLifeModel = gameOfLifeModel;
         
         initComponents();
@@ -44,9 +46,9 @@ public class GameWindowFrame extends javax.swing.JFrame {
         gameTablePanel.getTable().clearSelection();
     }
     
-    public GameTablePanel getGameTablePanel() {
-        return gameTablePanel;
-    }
+//    public GameTablePanel getGameTablePanel() {
+//        return gameTablePanel;
+//    }
     
     /**
      * Adds mouse listener for the table.
