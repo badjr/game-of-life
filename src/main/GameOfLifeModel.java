@@ -116,5 +116,40 @@ public class GameOfLifeModel {
             System.out.println();
         }
     } 
+    
+    
+        public boolean implementLogic(int i, int j){
+        
+        
+        int count=0;
+       
+               boolean isAlive=cellExistsAt(i,j);
+               if(i>0&&cellExistsAt(i-1,j))count++;//top neighbor
+               if(i>0&&j>0&&cellExistsAt(i-1,j-1))count++;//top_left neighbor
+               if(i>0&&j<cols-1&&cellExistsAt(i-1,j+1))count++;//top_right neighbor
+               if(j>0&&cellExistsAt(i,j-1))count++;//left neighbor
+               if(j<cols-1&&cellExistsAt(i,j+1))count++;//right neighbor
+               if(i<rows-1&&cellExistsAt(i+1,j))count++;//bottom neighbor
+               if(i<rows-1&&j>0&&cellExistsAt(i+1,j-1))count++;//bottom_left neighbor
+               if(i<rows-1&&j<cols-1&&cellExistsAt(i+1,j+1))count++;//bottom_right neighbor
+//synchronize here--(for threads)-------------------------------------------------------------
+               
+//       //        1. Any live cell with fewer than two live neighbours dies, as if caused by under-population.
+
+//        //       2. Any live cell with two or three live neighbours lives on to the next generation.
+//                 3. Any live cell with more than three live neighbours dies, as if by overcrowding.
+//               
+//      //         4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
+
+               
+           
+           return ((count<2)||(count>3 && isAlive)||(!isAlive && count==3));
+              
+                             
+    }
+         
+    
+    
+    
 
 }
