@@ -6,6 +6,8 @@
 
 package main;
 
+import static java.lang.Thread.sleep;
+
 /**
  *
  * @author Brett
@@ -15,9 +17,9 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         GameOfLifeModel model = new GameOfLifeModel(16, 16);
-        GameOfLifeModel temp = null;
+        GameOfLifeModel temp;
         GameWindowFrame gameWindow = new GameWindowFrame(model);
         
         GameWindowFrameController controller = new GameWindowFrameController(model, gameWindow);
@@ -42,11 +44,19 @@ public class Main {
         temp = model;
       for(int i=0; i<temp.getRows(); i++){
         for(int j=0; j<temp.getCols(); j++){
-        if(temp.implementLogic(i,j)) model.placeCell(i,j);
-        else model.removeCell(i, j);
+            System.out.println(i+","+j);
+        if(temp.implementLogic(i,j)){ model.placeCell(i,j);
+        
+        }else{ model.removeCell(i, j);
+        }
+        model.printBoard();
             }
+       
       }
-//        model.printBoard();
+       model.printBoard();
+       System.out.println("");
+       temp.printBoard();
+      
     }
    }
     
