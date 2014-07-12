@@ -104,7 +104,7 @@ public class GameWindowFrameController implements Runnable {
             }
             
             model.tick();
-            gameWindow.refreshBoard();
+            gameWindow.refreshBoard(); //FIXME: Why does the GUI freeze here, but doesn't freeze if calling run() in main?
             
 //            model.printBoard();
 //            System.out.println("-------------------------------");
