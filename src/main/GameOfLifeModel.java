@@ -117,9 +117,15 @@ public class GameOfLifeModel {
         }
     } 
     
-    
-    public boolean cellSurvivesAt(int i, int j) {
-        
+    /**
+     * Determines if a cell at i, j will be alive at the next tick.
+     * 
+     * @param i Row
+     * @param j Column
+     * @return true or false if a cell will be alive at i, j at the next tick.
+     * 
+     */
+    public boolean cellAliveNextTickAt(int i, int j) {
         
         int numNeighbors=0;
        
@@ -178,7 +184,7 @@ public class GameOfLifeModel {
         
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if (cellSurvivesAt(i, j)) {
+                if (cellAliveNextTickAt(i, j)) {
                     survivalTable[i][j] = 1;
                 }
                 else {

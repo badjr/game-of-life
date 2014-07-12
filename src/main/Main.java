@@ -53,7 +53,7 @@ public class Main {
                 for (int j = 0; j < model.getCols(); j++) {
 //                    System.out.println(i + "," + j);
 //                    Thread.sleep(1000);
-                    if (model.cellSurvivesAt(i, j)) {
+                    if (model.cellAliveNextTickAt(i, j)) {
                         model.placeCell(i, j);
                         gameWindow.refreshBoard(i, j);
                     }
