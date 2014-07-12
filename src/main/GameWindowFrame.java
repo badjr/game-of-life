@@ -38,7 +38,7 @@ public class GameWindowFrame extends javax.swing.JFrame {
         //to indicate that a cell in the table is occupied.
     }
     
-    public void refreshBoard(int row, int col) {
+    public void refreshBoard() {
         //So a cell in the table will update on click instead of after losing focus.
         gameTablePanel.getTable().repaint();
         
@@ -89,11 +89,11 @@ public class GameWindowFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(gameTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(174, 174, 174)
-                        .addComponent(startButton)))
+                        .addComponent(startButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(gameTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

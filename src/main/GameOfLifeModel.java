@@ -118,21 +118,21 @@ public class GameOfLifeModel {
     } 
     
     
-        public boolean implementLogic(int i, int j){
+    public boolean cellSurvivesAt(int i, int j) {
         
         
-        int count=0;
+        int numNeighbors=0;
        
-               boolean isAlive=cellExistsAt(i,j);
-               if(i>0&&cellExistsAt(i-1,j))count++;//top neighbor
-               if(i>0&&j>0&&cellExistsAt(i-1,j-1))count++;//top_left neighbor
-               if(i>0&&j<cols-1&&cellExistsAt(i-1,j+1))count++;//top_right neighbor
-               if(j>0&&cellExistsAt(i,j-1))count++;//left neighbor
-               if(j<cols-1&&cellExistsAt(i,j+1))count++;//right neighbor
-               if(i<rows-1&&cellExistsAt(i+1,j))count++;//bottom neighbor
-               if(i<rows-1&&j>0&&cellExistsAt(i+1,j-1))count++;//bottom_left neighbor
-               if(i<rows-1&&j<cols-1&&cellExistsAt(i+1,j+1))count++;//bottom_right neighbor
-//synchronize here--(for threads)-------------------------------------------------------------
+        boolean isAlive=cellExistsAt(i,j);
+        if(i>0&&cellExistsAt(i-1,j))numNeighbors++;//top neighbor
+        if(i>0&&j>0&&cellExistsAt(i-1,j-1))numNeighbors++;//top_left neighbor
+        if(i>0&&j<cols-1&&cellExistsAt(i-1,j+1))numNeighbors++;//top_right neighbor
+        if(j>0&&cellExistsAt(i,j-1))numNeighbors++;//left neighbor
+        if(j<cols-1&&cellExistsAt(i,j+1))numNeighbors++;//right neighbor
+        if(i<rows-1&&cellExistsAt(i+1,j))numNeighbors++;//bottom neighbor
+        if(i<rows-1&&j>0&&cellExistsAt(i+1,j-1))numNeighbors++;//bottom_left neighbor
+        if(i<rows-1&&j<cols-1&&cellExistsAt(i+1,j+1))numNeighbors++;//bottom_right neighbor
+        //synchronize here--(for threads)-------------------------------------------------------------
                
 //       //        1. Any live cell with fewer than two live neighbours dies, as if caused by under-population.
 
@@ -142,14 +142,63 @@ public class GameOfLifeModel {
 //      //         4. Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.
 
                
-           
-           return ((count<2)||(count>3 && isAlive)||(!isAlive && count==3));
-              
-                             
+        
+        return (
+//                !(isAlive && numNeighbors < 2) || 
+                (isAlive && (numNeighbors == 2 || numNeighbors == 3)) || 
+//                !(isAlive && numNeighbors > 3) || 
+                (!isAlive && numNeighbors == 3));
+        
+        /*
+        if (isAlive && numNeighbors < 2) {
+            return false;
+        }
+        else if (isAlive && (numNeighbors == 2 || numNeighbors == 3)) {
+            return true;
+        }
+        else if (isAlive && numNeighbors > 3) {
+            return false;
+        }
+        else if (!isAlive && numNeighbors == 3) {
+            return true;
+        }
+        else {
+            return false;
+        }
+        */
     }
-         
     
-    
+    /**
+     * Moves forward one time unit.
+     */
+    public void tick() {
+        //the survival table is used to determine if a cell is occupied or not
+        //for the next time unit
+        int survivalTable[][] = new int[rows][cols];
+        
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (cellSurvivesAt(i, j)) {
+                    survivalTable[i][j] = 1;
+                }
+                else {
+                    survivalTable[i][j] = 0;
+                }
+            }
+        }
+        
+        //Use survival table to adjust game table for next time unit
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (survivalTable[i][j] == 1) {
+                    placeCell(i, j);
+                }
+                else {
+                    removeCell(i, j);
+                }
+            }
+        }
+    }
     
 
 }

@@ -16,7 +16,7 @@ import javax.swing.table.TableModel;
  */
 public class GameOfLifeTableModel implements TableModel {
 
-    final private GameOfLifeModel gameOfLifeModel;
+    private final GameOfLifeModel gameOfLifeModel;
 
     public GameOfLifeTableModel(GameOfLifeModel gameOfLifeModel) {
         this.gameOfLifeModel = gameOfLifeModel;
@@ -55,7 +55,7 @@ public class GameOfLifeTableModel implements TableModel {
     }
 
     /**
-     * Not used, updating the model via placeCell() and removeCell() works.
+     * Not used. Updating the model via placeCell() and removeCell() works.
      *
      * @param aValue
      * @param rowIndex
