@@ -9,8 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JTable;
 
 /**
@@ -18,10 +16,12 @@ import javax.swing.JTable;
  * interacts with the GameWindowFrame.
  *
  */
-public class GameWindowFrameController implements Runnable {
+public class GameWindowFrameController {
 
     private final GameOfLifeModel model;
     private final GameWindowFrame gameWindow;
+
+    private boolean gameRunning = false;
 
     public GameWindowFrameController(GameOfLifeModel model, GameWindowFrame view) {
 
@@ -85,31 +85,48 @@ public class GameWindowFrameController implements Runnable {
     /**
      * Perform these actions when start button is pressed.
      */
-    class StartButtonListener implements ActionListener {
+    private class StartButtonListener implements ActionListener {
+
+        Thread t;
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            run();
+            if (!gameRunning) {
+                gameRunning = true;
+                gameWindow.getStartButton().setText("Stop");
+                t = new Thread(new GameLoopThread());
+                t.start();
+            }
+            else {
+                t.interrupt();
+                gameWindow.getStartButton().setText("Start");
+                gameRunning = false;
+            }
         }
     }
 
-    @Override
-    public void run() {
-        while (true) {
-            try {
-                //Delay between ticks
-                Thread.sleep(1000);
-            }
-            catch (InterruptedException ex) {
-                Logger.getLogger(GameWindowFrameController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-            model.tick();
-            gameWindow.refreshBoard(); //FIXME: Why does the GUI freeze here, but doesn't freeze if calling run() in main?
-            
+    private class GameLoopThread implements Runnable {
+        //TODO: Make game stop when no cells are alive.
+        @Override
+        public void run() {
+
+            while (true) {
+
+                try {
+                    //Delay between ticks
+                    Thread.sleep(200);
+                }
+                catch (InterruptedException ex) {
+                    //When interrupted, exit the run() function.
+                    return;
+                }
+
+                model.tick();
+                gameWindow.refreshBoard();
+
 //            model.printBoard();
 //            System.out.println("-------------------------------");
-
+            }
         }
     }
 

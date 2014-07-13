@@ -6,8 +6,6 @@
 
 package main;
 
-import static java.lang.Thread.sleep;
-
 /**
  *
  * @author Brett
@@ -20,7 +18,6 @@ public class Main {
      */
     public static void main(String[] args) throws InterruptedException {
         GameOfLifeModel model = new GameOfLifeModel(16, 16);
-//        GameOfLifeModel temp;
         GameWindowFrame gameWindow = new GameWindowFrame(model);
         
         GameWindowFrameController controller = new GameWindowFrameController(model, gameWindow);
@@ -42,9 +39,6 @@ public class Main {
         
         //show the board
         gameWindow.setVisible(true);
-        
-        //start game
-        controller.run();
         
     }
     

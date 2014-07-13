@@ -8,6 +8,7 @@ package main;
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import javax.swing.JButton;
 
 /**
  * The GameWindowFrame contains all the GUI components of the game in one
@@ -53,7 +54,7 @@ public class GameWindowFrame extends javax.swing.JFrame {
      * Adds mouse listener for the table.
      * @param ml 
      */
-    void addTableMouseListener(MouseListener ml) {
+    public void addTableMouseListener(MouseListener ml) {
         gameTablePanel.getTable().addMouseListener(ml);
     }
     
@@ -61,9 +62,13 @@ public class GameWindowFrame extends javax.swing.JFrame {
      * Adds action listener for the start button.
      * @param al 
      */
-    void addStartButtonListener(ActionListener al) {
+    public void addStartButtonListener(ActionListener al) {
         startButton.addActionListener(al);
-    }    
+    }
+    
+    public JButton getStartButton() {
+        return startButton;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
