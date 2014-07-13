@@ -16,6 +16,7 @@ public class Main {
 
     /**
      * @param args the command line arguments
+     * @throws java.lang.InterruptedException
      */
     public static void main(String[] args) throws InterruptedException {
         GameOfLifeModel model = new GameOfLifeModel(16, 16);
@@ -42,35 +43,9 @@ public class Main {
         //show the board
         gameWindow.setVisible(true);
         
+        //start game
         controller.run();
         
-        /*
-        //looping through the Game Logic for each cell
-        while (true) {
-//            temp = model;
-            Thread.sleep(200);
-            for (int i = 0; i < model.getRows(); i++) {
-                for (int j = 0; j < model.getCols(); j++) {
-//                    System.out.println(i + "," + j);
-//                    Thread.sleep(1000);
-                    if (model.cellAliveNextTickAt(i, j)) {
-                        model.placeCell(i, j);
-                        gameWindow.refreshBoard(i, j);
-                    }
-                    else {
-                        model.removeCell(i, j);
-                        gameWindow.refreshBoard(i, j);
-   
-                    }
-//                    model.printBoard();
-                }
-
-            }
-//            model.printBoard();
-//            System.out.println("");
-//            model.printBoard();
-            
-        }*/
     }
     
 }

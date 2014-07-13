@@ -3,34 +3,50 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package main;
 
+import java.awt.Color;
+import javax.swing.JLabel;
 import javax.swing.JTable;
 
 /**
  * The GameTablePanel is a JPanel containing the JTable that displays the game
  * board.
- * 
+ *
  */
 public class GameTablePanel extends javax.swing.JPanel {
-    
+
     /**
      * Creates new form GameTablePanel.
-     * 
+     *
      */
     public GameTablePanel() {
+        
         initComponents();
+        
+        gameTable.setDefaultRenderer(Object.class,
+            (JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) -> {
+                //This inner TableCellRenderer class for setting the background for individual cells.
+                JLabel comp = new JLabel();
+                comp.setOpaque(true);
+                if (value.equals(1)) {
+                    comp.setBackground(Color.BLACK);
+                }
+                else {
+                    comp.setBackground(Color.WHITE);
+                }
+                return comp;
+            });
     }
-    
+
     /**
-     * 
+     *
      * @return The JTable that displays the game board.
      */
-    public JTable getTable() {
+    public final JTable getTable() {
         return gameTable;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

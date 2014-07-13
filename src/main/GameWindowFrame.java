@@ -34,8 +34,6 @@ public class GameWindowFrame extends javax.swing.JFrame {
         
         //TODO: Make the game grid generate all cells as square no matter what size.
         //Currently, columns stretch to width.
-        //TODO: Instead of displaying 1 or 0, change the background or something
-        //to indicate that a cell in the table is occupied.
     }
     
     public void refreshBoard() {
@@ -43,7 +41,8 @@ public class GameWindowFrame extends javax.swing.JFrame {
         gameTablePanel.getTable().repaint();
         
         //So it doesn't stay selected after clicking.
-        gameTablePanel.getTable().clearSelection();
+//        gameTablePanel.getTable().clearSelection();
+        //Made no difference after setting the TableRenderer
     }
     
 //    public GameTablePanel getGameTablePanel() {

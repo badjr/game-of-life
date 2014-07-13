@@ -97,6 +97,7 @@ public class GameWindowFrameController implements Runnable {
     public void run() {
         while (true) {
             try {
+                //Delay between ticks
                 Thread.sleep(1000);
             }
             catch (InterruptedException ex) {
