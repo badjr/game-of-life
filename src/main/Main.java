@@ -25,7 +25,6 @@ public class Main {
         //test Cells
         model.placeCell(2, 2);
         model.placeCell(1, 3);
-        model.placeCell(1, 3);
         model.placeCell(4, 3);
         model.placeCell(3, 4);
         model.placeCell(2, 1);

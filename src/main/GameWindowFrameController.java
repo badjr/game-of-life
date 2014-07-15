@@ -23,6 +23,8 @@ public class GameWindowFrameController {
 
     private boolean gameRunning = false;
 
+    private Thread gameThread;
+
     public GameWindowFrameController(GameOfLifeModel model, GameWindowFrame view) {
 
         this.model = model;
@@ -83,37 +85,58 @@ public class GameWindowFrameController {
     }
 
     /**
-     * Perform these actions when start button is pressed.
+     * When the start (or stop) button is pressed, starts or stops the game
+     * depending on if it's running.
      */
     private class StartButtonListener implements ActionListener {
 
-        Thread t;
-
+//        Thread t;
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!gameRunning) {
-                gameRunning = true;
-                gameWindow.getStartButton().setText("Stop");
-                t = new Thread(new GameLoopThread());
-                t.start();
+                startGame();
             }
             else {
-                t.interrupt();
-                gameWindow.getStartButton().setText("Start");
-                gameRunning = false;
+                stopGame();
             }
         }
     }
+    
+    /**
+     * Starts the thread that ticks the GameOfLifeModel, and also makes the
+     * "Start" button say "Stop".
+     */
+    private void startGame() {
+        gameRunning = true;
+        gameWindow.getStartButton().setText("Stop");
+        gameThread = new Thread(new GameLoopThread());
+        gameThread.start();
+    }
+    
+    /**
+     * Interrupts the thread that ticks the GameOfLifeModel, and also makes the
+     * "Stop" button say "Start".
+     */
+    private void stopGame() {
+        gameThread.interrupt();
+        gameWindow.getStartButton().setText("Start");
+        gameRunning = false;
+    }
 
     private class GameLoopThread implements Runnable {
-        //TODO: Make game stop when no cells are alive.
+
         @Override
         public void run() {
 
             while (true) {
-
+                
+                if (model.getNumLiveCells() == 0) {
+                    stopGame();
+                }
+                
                 try {
                     //Delay between ticks
+                    //FIXME: Thread.sleep called in loop warning.
                     Thread.sleep(200);
                 }
                 catch (InterruptedException ex) {
