@@ -9,7 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import javax.swing.JSlider;
 import javax.swing.JTable;
+import javax.swing.event.ChangeListener;
 
 /**
  * The GameWindowFrameController updates the model and the view when the user
@@ -83,7 +85,10 @@ public class GameWindowFrameController {
             //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
-
+        public void addSliderListener(ChangeListener al){
+        gameWindow.getSlider().addChangeListener(al);
+        }
+      
     /**
      * When the start (or stop) button is pressed, starts or stops the game
      * depending on if it's running.
@@ -101,7 +106,9 @@ public class GameWindowFrameController {
             }
         }
     }
-    
+   private int getSleepTime(){
+       return gameWindow.getSlider().getValue();
+   }
     /**
      * Starts the thread that ticks the GameOfLifeModel, and also makes the
      * "Start" button say "Stop".
@@ -127,7 +134,7 @@ public class GameWindowFrameController {
 
         @Override
         public void run() {
-
+               
             while (true) {
                 
                 if (model.getNumLiveCells() == 0) {
@@ -137,7 +144,7 @@ public class GameWindowFrameController {
                 try {
                     //Delay between ticks
                     //FIXME: Thread.sleep called in loop warning.
-                    Thread.sleep(200);
+                    Thread.sleep(getSleepTime());
                 }
                 catch (InterruptedException ex) {
                     //When interrupted, exit the run() function.
