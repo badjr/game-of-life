@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 import javax.swing.JSlider;
 import javax.swing.JTable;
 import javax.swing.event.ChangeListener;
@@ -20,7 +22,7 @@ import javax.swing.event.ChangeListener;
  */
 public class GameWindowFrameController {
 
-    private final GameOfLifeModel model;
+    private  GameOfLifeModel model;
     private final GameWindowFrame gameWindow;
 
     private boolean gameRunning = false;
@@ -35,9 +37,58 @@ public class GameWindowFrameController {
         //Add action listeners
         view.addTableMouseListener(new TableMouseListener());
         view.addStartButtonListener(new StartButtonListener());
-
+        view.addMouseWheelListener(new TableMouseWheelListener());
     }
-
+    
+    class TableMouseWheelListener implements MouseWheelListener {
+            int count=0;
+          
+        
+        void copyNewBoard(GameOfLifeModel temp, GameOfLifeModel model, boolean isDecrease){
+           
+            for(int i=0; i< model.getRows(); i++){
+                for(int j=0; j<model.getCols(); j++){
+                    if(model.cellExistsAt(i, j)){
+                        if(isDecrease&&i>0&&j>0 ){
+                            
+                            temp.updateGridAt(i-1, j-1);
+                        
+                        }
+                        else if(isDecrease){
+                            temp.updateGridAt(i,j);
+                            }
+                        else{
+                            temp.updateGridAt(i+1, j+1);
+                        }
+                    }
+                }
+            }
+            model = temp;
+            model.printBoard();
+           
+        }
+        @Override
+        public void mouseWheelMoved(MouseWheelEvent e) {
+            count+=e.getWheelRotation();
+            if(count>1) {
+       /*Zooms out by 1 row and 1 column*/ 
+                GameOfLifeModel temp = new GameOfLifeModel(model.getRows()+2, model.getCols()+2);
+                copyNewBoard(temp, model, false);
+               model=temp;
+                     count =0;
+            }else if(count<-1){
+                if(model.getRows()>4){
+                GameOfLifeModel temp = new GameOfLifeModel(model.getRows()-2, model.getCols()-2);
+                copyNewBoard(temp, model, true);
+                    model=temp;
+                     count =0;
+                }
+         
+        }           
+                 System.out.println(e.getWheelRotation());
+                    
+      }
+    }
     /**
      * Mouse events for the table.
      */
@@ -85,6 +136,11 @@ public class GameWindowFrameController {
             //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
+
+    /**
+     *
+     */
+
         public void addSliderListener(ChangeListener al){
         gameWindow.getSlider().addChangeListener(al);
         }
@@ -159,5 +215,7 @@ public class GameWindowFrameController {
             }
         }
     }
+  } 
+    
 
-}
+

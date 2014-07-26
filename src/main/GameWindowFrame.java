@@ -74,6 +74,10 @@ public class GameWindowFrame extends javax.swing.JFrame {
     public JSlider getSlider(){
         return slider;
     }
+    public GameTablePanel getGameTablePanel(){
+            return gameTablePanel;
+    }
+            
 
     /**
      * This method is called from within the constructor to initialize the form.
