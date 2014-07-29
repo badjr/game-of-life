@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import javax.swing.JSlider;
 import javax.swing.JTable;
 import javax.swing.event.ChangeListener;
 
@@ -52,6 +51,13 @@ public class GameWindowFrameController {
         @Override
         public void mouseClicked(MouseEvent e) {
 
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+            //Using mousePressed instead of mouseClicked makes it easier to toggle
+            //cells. They will toggle without release and dragging doesn't make them not toggle.
+            
             //Get row/col user clicked on
             JTable target = (JTable) e.getSource();
             int row = target.getSelectedRow();
@@ -62,12 +68,6 @@ public class GameWindowFrameController {
 
             //Update view
             gameWindow.refreshBoard();
-
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
-            //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         @Override
@@ -85,17 +85,17 @@ public class GameWindowFrameController {
             //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
     }
-        public void addSliderListener(ChangeListener al){
+
+    public void addSliderListener(ChangeListener al) {
         gameWindow.getSlider().addChangeListener(al);
-        }
-      
+    }
+
     /**
      * When the start (or stop) button is pressed, starts or stops the game
      * depending on if it's running.
      */
     private class StartButtonListener implements ActionListener {
 
-//        Thread t;
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!gameRunning) {
@@ -106,9 +106,11 @@ public class GameWindowFrameController {
             }
         }
     }
-   private int getSleepTime(){
-       return gameWindow.getSlider().getValue();
-   }
+
+    private int getSleepTime() {
+        return gameWindow.getSlider().getValue();
+    }
+
     /**
      * Starts the thread that ticks the GameOfLifeModel, and also makes the
      * "Start" button say "Stop".
@@ -119,7 +121,7 @@ public class GameWindowFrameController {
         gameThread = new Thread(new GameLoopThread());
         gameThread.start();
     }
-    
+
     /**
      * Interrupts the thread that ticks the GameOfLifeModel, and also makes the
      * "Stop" button say "Start".
@@ -134,17 +136,17 @@ public class GameWindowFrameController {
 
         @Override
         public void run() {
-               
+
             while (true) {
-                
+
                 if (model.getNumLiveCells() == 0) {
                     stopGame();
                 }
-                
+
                 try {
                     //Delay between ticks
                     //FIXME: Thread.sleep called in loop warning.
-                    Thread.sleep(getSleepTime());
+                    Thread.sleep(getSleepTime()*10);
                 }
                 catch (InterruptedException ex) {
                     //When interrupted, exit the run() function.
@@ -154,8 +156,6 @@ public class GameWindowFrameController {
                 model.tick();
                 gameWindow.refreshBoard();
 
-//            model.printBoard();
-//            System.out.println("-------------------------------");
             }
         }
     }
