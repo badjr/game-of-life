@@ -3,81 +3,111 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package main;
 
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JSlider;
+import javax.swing.event.ChangeListener;
 
 /**
- * The GameWindowFrame contains all the GUI components of the game in one
- * JFrame (window).
- * 
+ * The GameWindowFrame contains all the GUI components of the game in one JFrame
+ * (window).
+ *
  */
 public class GameWindowFrame extends javax.swing.JFrame {
 
     private static GameOfLifeModel gameOfLifeModel;
-    
+
     /**
      * Creates new form GameWindowFrame
+     *
      * @param gameOfLifeModel
      */
     public GameWindowFrame(GameOfLifeModel gameOfLifeModel) {
-        
+
         //Game window frame needs the GameOfLifeModel
         GameWindowFrame.gameOfLifeModel = gameOfLifeModel;
-        
+
         initComponents();
-        
+
         //Set table model for the game table.
         gameTablePanel.getTable().setModel(new GameOfLifeTableModel(gameOfLifeModel));
-        
+
         //TODO: Make the game grid generate all cells as square no matter what size.
         //Currently, columns stretch to width.
     }
-    
+
     public void refreshBoard() {
         //So a cell in the table will update on click instead of after losing focus.
         gameTablePanel.getTable().repaint();
-        
+
         //So it doesn't stay selected after clicking.
 //        gameTablePanel.getTable().clearSelection();
         //Made no difference after setting the TableRenderer
     }
-    
-//    public GameTablePanel getGameTablePanel() {
-//        return gameTablePanel;
-//    }
-    
+
     /**
      * Adds mouse listener for the table.
-     * @param ml 
+     *
+     * @param ml
      */
     public void addTableMouseListener(MouseListener ml) {
         gameTablePanel.getTable().addMouseListener(ml);
     }
-    
+
     /**
      * Adds action listener for the start button.
-     * @param al 
+     *
+     * @param al
      */
     public void addStartButtonListener(ActionListener al) {
         startButton.addActionListener(al);
     }
-    
+
+    /**
+     * Adds the slider listener for the slider controlling the delay between
+     * ticks.
+     * @param al
+     */
+    public void addSliderListener(ChangeListener al) {
+        slider.addChangeListener(al);
+    }
+
+    /**
+     *
+     * @return JButton that starts or stops the game.
+     */
     public JButton getStartButton() {
         return startButton;
     }
-    
+
+    /**
+     *
+     * @return The JSlider controlling the delay between ticks.
+     */
     public JSlider getSlider() {
         return slider;
     }
-    public GameTablePanel getGameTablePanel(){
-            return gameTablePanel;
+
+    /**
+     *
+     * @return The GameTablePanel (extending JPanel) that is the container for
+     * just the grid.
+     */
+    public GameTablePanel getGameTablePanel() {
+        return gameTablePanel;
     }
-            
+    
+    /**
+     * 
+     * @return The JLabel that indicates the delay in milliseconds.
+     */
+    public JLabel getTickDelayLabel() {
+        return tickDelayLabel;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,7 +121,7 @@ public class GameWindowFrame extends javax.swing.JFrame {
         startButton = new javax.swing.JButton();
         gameTablePanel = new main.GameTablePanel();
         slider = new javax.swing.JSlider();
-        jLabel1 = new javax.swing.JLabel();
+        tickDelayLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,7 +131,7 @@ public class GameWindowFrame extends javax.swing.JFrame {
         slider.setPaintTicks(true);
         slider.setSnapToTicks(true);
 
-        jLabel1.setText("Delay: ");
+        tickDelayLabel.setText("Delay: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,12 +140,12 @@ public class GameWindowFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
+                        .addGap(76, 76, 76)
                         .addComponent(startButton)
-                        .addGap(65, 65, 65)
+                        .addGap(43, 43, 43)
                         .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(tickDelayLabel))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(gameTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -130,7 +160,7 @@ public class GameWindowFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(startButton)
                     .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(tickDelayLabel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -167,8 +197,8 @@ public class GameWindowFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private main.GameTablePanel gameTablePanel;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JSlider slider;
     private javax.swing.JButton startButton;
+    private javax.swing.JLabel tickDelayLabel;
     // End of variables declaration//GEN-END:variables
 }
