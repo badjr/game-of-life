@@ -71,7 +71,7 @@ public class GameWindowFrame extends javax.swing.JFrame {
         return startButton;
     }
     
-    public JSlider getSlider(){
+    public JSlider getSlider() {
         return slider;
     }
 
@@ -87,6 +87,7 @@ public class GameWindowFrame extends javax.swing.JFrame {
         startButton = new javax.swing.JButton();
         gameTablePanel = new main.GameTablePanel();
         slider = new javax.swing.JSlider();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -96,6 +97,8 @@ public class GameWindowFrame extends javax.swing.JFrame {
         slider.setPaintTicks(true);
         slider.setSnapToTicks(true);
 
+        jLabel1.setText("Delay: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -103,10 +106,12 @@ public class GameWindowFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
+                        .addGap(93, 93, 93)
                         .addComponent(startButton)
+                        .addGap(65, 65, 65)
+                        .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(gameTablePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -120,7 +125,8 @@ public class GameWindowFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(startButton)
-                    .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(slider, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -157,6 +163,7 @@ public class GameWindowFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private main.GameTablePanel gameTablePanel;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JSlider slider;
     private javax.swing.JButton startButton;
     // End of variables declaration//GEN-END:variables
