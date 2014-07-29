@@ -62,7 +62,7 @@ public class GameOfLifeModel {
      * @param col
      */
     public void placeCell(int row, int col) {
-        if (!cellExistsAt(row, col)) {
+            if (!cellExistsAt(row, col)) {
             gameBoard[row][col] = 1;
             numLiveCells++;
         }
@@ -103,6 +103,7 @@ public class GameOfLifeModel {
      * @param col
      */
     public void updateGridAt(int row, int col) {
+        
         if (cellExistsAt(row, col)) {
             removeCell(row, col);
         }
