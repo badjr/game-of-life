@@ -7,6 +7,7 @@ package main;
 
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 /**
@@ -45,6 +46,10 @@ public class GameTablePanel extends javax.swing.JPanel {
      */
     public final JTable getTable() {
         return gameTable;
+    }
+    
+    public final JScrollPane getJScrollPane() {
+        return jScrollPane1;
     }
 
     /**

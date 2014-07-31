@@ -6,6 +6,8 @@
 
 package main;
 
+import java.awt.Dimension;
+
 /**
  *
  * @author Brett
@@ -25,12 +27,12 @@ public class Main {
         //test Cells
         model.placeCell(2, 2);
         model.placeCell(1, 3);
-        model.placeCell(4, 3);
-        model.placeCell(3, 4);
-        model.placeCell(2, 1);
-        model.placeCell(1, 2);
-        model.placeCell(3, 2);
-        model.placeCell(2, 3);
+//        model.placeCell(4, 3);
+//        model.placeCell(3, 4);
+//        model.placeCell(2, 1);
+//        model.placeCell(1, 2);
+//        model.placeCell(3, 2);
+//        model.placeCell(2, 3);
         
 //        model.placeCell(1, 1);
 //        model.placeCell(2, 1);
@@ -38,6 +40,21 @@ public class Main {
         
         //show the board
         gameWindow.setVisible(true);
+        
+//        System.out.println(gameWindow.getGameTablePanel().getTable().getSize().height);
+//        System.out.println(gameWindow.getGameTablePanel().getTable().getSize().width);
+        System.out.println(gameWindow.getGameTablePanel().getTable().getWidth());
+        System.out.println(gameWindow.getGameTablePanel().getTable().getHeight());
+        
+//        gameWindow.getGameTablePanel().setPreferredSize(gameWindow.getGameTablePanel().getTable().getSize());
+        gameWindow.getGameTablePanel().setPreferredSize(new Dimension(gameWindow.getGameTablePanel().getTable().getWidth(), gameWindow.getGameTablePanel().getTable().getHeight()));
+//        gameWindow.getGameTablePanel().setSize(gameWindow.getGameTablePanel().getTable().getSize());
+//        System.out.println(gameWindow.getGameTablePanel().getWidth());
+//        System.out.println(gameWindow.getGameTablePanel().getHeight());
+//        System.out.println(gameWindow.getGameTablePanel().getJScrollPane().getWidth());
+//        System.out.println(gameWindow.getGameTablePanel().getJScrollPane().getHeight());
+        System.out.println(gameWindow.getGameTablePanel().getTable().getWidth());
+        System.out.println(gameWindow.getGameTablePanel().getTable().getHeight());
         
     }
     

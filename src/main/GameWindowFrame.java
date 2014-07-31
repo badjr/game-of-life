@@ -5,11 +5,13 @@
  */
 package main;
 
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
+import javax.swing.JTable;
 import javax.swing.event.ChangeListener;
 
 /**
@@ -38,6 +40,26 @@ public class GameWindowFrame extends javax.swing.JFrame {
 
         //TODO: Make the game grid generate all cells as square no matter what size.
         //Currently, columns stretch to width.
+        gameTablePanel.getTable().setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        for (int i = 0, n = gameTablePanel.getTable().getColumnModel().getColumnCount(); i < n; i++) {
+            gameTablePanel.getTable().getColumnModel().getColumn(i).setPreferredWidth(16);
+        }
+//        gameTablePanel.setSize(gameTablePanel.getTable().getWidth(), gameTablePanel.getTable().getHeight());
+//        gameTablePanel.setPreferredSize(new Dimension(gameTablePanel.getTable().getWidth(), gameTablePanel.getTable().getWidth()));
+//        gameTablePanel.setPreferredSize(new Dimension(gameTablePanel.getJScrollPane().getWidth(), gameTablePanel.getJScrollPane().getWidth()));
+//        gameTablePanel.getJScrollPane().setPreferredSize(new Dimension(gameTablePanel.getTable().getWidth(), gameTablePanel.getTable().getWidth()));
+//        gameTablePanel.setPreferredSize(new Dimension(gameTablePanel.getTable().getRowHeight()*gameTablePanel.getTable().getRowCount()+13, gameTablePanel.getTable().getRowHeight()*gameTablePanel.getTable().getRowCount()+13));
+//        gameTablePanel.setPreferredSize(gameTablePanel.getTable().getSize());
+//        gameTablePanel.setPreferredSize(new Dimension(93, 93));
+//        System.out.println(gameTablePanel.getTable().getHeight());
+//        System.out.println(gameTablePanel.getTable().getWidth());
+//        
+//        System.out.println(gameTablePanel.getJScrollPane().getHeight());
+//        System.out.println(gameTablePanel.getJScrollPane().getWidth());
+//        
+//        System.out.println(gameTablePanel.getTable().getSize().height);
+//        System.out.println(gameTablePanel.getTable().getSize().width);
+        
     }
 
     public void refreshBoard() {
