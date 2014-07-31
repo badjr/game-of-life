@@ -75,7 +75,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="tickDelayLabel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Delay: "/>
+        <Property name="text" type="java.lang.String" value="Delay: xxxx ms"/>
       </Properties>
     </Component>
   </SubComponents>

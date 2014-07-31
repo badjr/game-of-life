@@ -5,7 +5,6 @@
  */
 package main;
 
-import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
@@ -38,34 +37,18 @@ public class GameWindowFrame extends javax.swing.JFrame {
         //Set table model for the game table.
         gameTablePanel.getTable().setModel(new GameOfLifeTableModel(gameOfLifeModel));
 
-        //TODO: Make the game grid generate all cells as square no matter what size.
-        //Currently, columns stretch to width.
+        //Make all columns have width 16 since row is by default 16.
+        //This makes all cells square.
         gameTablePanel.getTable().setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         for (int i = 0, n = gameTablePanel.getTable().getColumnModel().getColumnCount(); i < n; i++) {
             gameTablePanel.getTable().getColumnModel().getColumn(i).setPreferredWidth(16);
         }
-//        gameTablePanel.setSize(gameTablePanel.getTable().getWidth(), gameTablePanel.getTable().getHeight());
-//        gameTablePanel.setPreferredSize(new Dimension(gameTablePanel.getTable().getWidth(), gameTablePanel.getTable().getWidth()));
-//        gameTablePanel.setPreferredSize(new Dimension(gameTablePanel.getJScrollPane().getWidth(), gameTablePanel.getJScrollPane().getWidth()));
-//        gameTablePanel.getJScrollPane().setPreferredSize(new Dimension(gameTablePanel.getTable().getWidth(), gameTablePanel.getTable().getWidth()));
-//        gameTablePanel.setPreferredSize(new Dimension(gameTablePanel.getTable().getRowHeight()*gameTablePanel.getTable().getRowCount()+13, gameTablePanel.getTable().getRowHeight()*gameTablePanel.getTable().getRowCount()+13));
-//        gameTablePanel.setPreferredSize(gameTablePanel.getTable().getSize());
-//        gameTablePanel.setPreferredSize(new Dimension(93, 93));
-//        System.out.println(gameTablePanel.getTable().getHeight());
-//        System.out.println(gameTablePanel.getTable().getWidth());
-//        
-//        System.out.println(gameTablePanel.getJScrollPane().getHeight());
-//        System.out.println(gameTablePanel.getJScrollPane().getWidth());
-//        
-//        System.out.println(gameTablePanel.getTable().getSize().height);
-//        System.out.println(gameTablePanel.getTable().getSize().width);
         
     }
 
     public void refreshBoard() {
         //So a cell in the table will update on click instead of after losing focus.
         gameTablePanel.getTable().repaint();
-
         //So it doesn't stay selected after clicking.
 //        gameTablePanel.getTable().clearSelection();
         //Made no difference after setting the TableRenderer
@@ -130,7 +113,7 @@ public class GameWindowFrame extends javax.swing.JFrame {
     public JLabel getTickDelayLabel() {
         return tickDelayLabel;
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -153,7 +136,7 @@ public class GameWindowFrame extends javax.swing.JFrame {
         slider.setPaintTicks(true);
         slider.setSnapToTicks(true);
 
-        tickDelayLabel.setText("Delay: ");
+        tickDelayLabel.setText("Delay: xxxx ms");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

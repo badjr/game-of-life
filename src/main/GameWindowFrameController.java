@@ -42,6 +42,9 @@ public class GameWindowFrameController {
         
         //Display initial delay.
         view.getTickDelayLabel().setText("Delay: " + view.getSlider().getValue()*10 + " ms");
+        
+        //FIXME: Tried calling pack() here but sometimes window is too small
+//        view.pack();
     }
     
     /**

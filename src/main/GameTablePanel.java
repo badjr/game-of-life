@@ -6,6 +6,7 @@
 package main;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -52,6 +53,13 @@ public class GameTablePanel extends javax.swing.JPanel {
         return jScrollPane1;
     }
 
+    
+    @Override
+    public Dimension getPreferredSize() {
+//        return new Dimension(gameTable.getWidth(), gameTable.getHeight());
+        return new Dimension(gameTable.getWidth()+1, gameTable.getHeight()+1); //+1 to get the rightmost and bottommost borders
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,6 +72,10 @@ public class GameTablePanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         gameTable = new javax.swing.JTable();
 
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        gameTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         gameTable.setCellSelectionEnabled(true);
         gameTable.setTableHeader(null);
         jScrollPane1.setViewportView(gameTable);
@@ -72,17 +84,11 @@ public class GameTablePanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
